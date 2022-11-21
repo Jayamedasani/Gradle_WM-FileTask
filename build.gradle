@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+application{
+    mainClassName='org.example.Main'
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation ([group: "com.fasterxml.jackson.core" ,name: 'jackson-core' ,version: '2.13.3'],
+            [group: "com.fasterxml.jackson.core", name: 'jackson-databind' , version: '2.13.3'],
+            [group: "com.googlecode.json-simple" , name: "json-simple" , version: '1.1'],
+            [group: "org.json", name:"json", version: '20210307'],
+            [group:"org.springframework", name:"spring-context", version:'5.3.22'],
+            [group:"org.springframework", name:"spring-core", version: '5.3.22'],
+            [group:"ch.qos.logback", name:"logback-classic", version:'1.2.6']
+    )
+
+}
+
+test {
+    useJUnitPlatform()
+}
+task fileTaskApp(type:JavaExec){
+    classpath=sourceSets.main.runtimeClasspath
+    main=mainClassName
+}
